@@ -82,6 +82,7 @@
     <Compile Include="Infra\EF6\EF6Context.cs" />
     <Compile Include="Infra\IDbContext.cs" />
     <Compile Include="Domain\Person\PersonValidatorForCreate.cs" />
+    <Compile Include="Utils\WrapperDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

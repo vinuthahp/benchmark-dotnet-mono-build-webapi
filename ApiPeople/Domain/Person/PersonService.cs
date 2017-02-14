@@ -23,9 +23,9 @@ namespace ApiPeople.Domain.Person
             return repo.Get(id);
         }
 
-        public IEnumerable<PersonEntity> List(IDictionary<string, object> queryData)
+        public WrapperDTO<PersonEntity> List(IDictionary<string, object> queryData)
         {
-            return repo.Query(queryData);
+			return new WrapperDTO<PersonEntity>(repo.Query(queryData));
         }
 
         public PersonEntity Create(IDictionary<string, object> formData)

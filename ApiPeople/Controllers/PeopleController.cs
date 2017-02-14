@@ -47,10 +47,8 @@ namespace ApiPeople.Controllers
 			}
 
 			var entity = service.Create(formData);
-			return this.CreatedAtRoute(
-				"{id}",
-				new { @id = entity.Id },
-				entity);
+			var resource = string.Format("people/{0}", entity.Id);
+			return Created(resource, entity);
 		}
 
 		[HttpPut, HttpPatch]

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ApiPeople.Utils;
 
 namespace ApiPeople.Domain.Person
 {
@@ -8,7 +9,7 @@ namespace ApiPeople.Domain.Person
 
         PersonEntity Read(int id);
 
-        IEnumerable<PersonEntity> List(IDictionary<string, object> queryData);
+        WrapperDTO<PersonEntity> List(IDictionary<string, object> queryData);
 
         PersonEntity Create(IDictionary<string, object> formData);
 
