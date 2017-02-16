@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using ApiPeople.Utils;
 
 namespace ApiPeople.Domain.Person
@@ -23,12 +24,12 @@ namespace ApiPeople.Domain.Person
             return repo.Get(id);
         }
 
-        public WrapperDTO<PersonEntity> List(IDictionary<string, object> queryData)
+        public WrapperDTO<PersonEntity> List(NameValueCollection queryData)
         {
 			return new WrapperDTO<PersonEntity>(repo.Query(queryData));
         }
 
-        public PersonEntity Create(IDictionary<string, object> formData)
+        public PersonEntity Create(NameValueCollection formData)
         {
             var person = repo.New();
             person.CopyFrom(formData);
@@ -36,7 +37,7 @@ namespace ApiPeople.Domain.Person
             return person;
         }
 
-        public bool Update(int id, IDictionary<string, object> formData)
+        public bool Update(int id, NameValueCollection formData)
         {
             var person = repo.Get(id);
             if (person == null)

@@ -11,7 +11,8 @@ namespace ApiPeople
 		{
 			var config = new HttpConfiguration()
 				.ConfigureDependencyInjection()
-				.ConfigureRouting();
+				.ConfigureRouting()
+				.ConfigureTracing();
 
 			app.UseWebApi(config);
 			app.UseErrorPage(ErrorPageOptions.ShowAll);

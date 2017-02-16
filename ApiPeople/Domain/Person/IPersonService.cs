@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using ApiPeople.Utils;
 
 namespace ApiPeople.Domain.Person
@@ -9,11 +10,11 @@ namespace ApiPeople.Domain.Person
 
         PersonEntity Read(int id);
 
-        WrapperDTO<PersonEntity> List(IDictionary<string, object> queryData);
+        WrapperDTO<PersonEntity> List(NameValueCollection queryData);
 
-        PersonEntity Create(IDictionary<string, object> formData);
+        PersonEntity Create(NameValueCollection formData);
 
-        bool Update(int id, IDictionary<string, object> formData);
+        bool Update(int id, NameValueCollection formData);
 
         bool Delete(int id);
     }

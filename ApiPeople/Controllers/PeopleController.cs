@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Specialized;
 using System.Net;
+using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using ApiPeople.Domain.Person;
 
@@ -10,7 +12,7 @@ namespace ApiPeople.Controllers
 	{
 		private readonly IPersonService service;
 		private readonly IPersonValidatorForCreate validator;
-
+			
 		public PersonController(
 			IPersonService service,
 			IPersonValidatorForCreate validator)
@@ -21,8 +23,9 @@ namespace ApiPeople.Controllers
 
 		[HttpGet]
 		[Route("")]
-		public IHttpActionResult List(IDictionary<string, object> queryData)
+		public IHttpActionResult List()
 		{
+			var queryData = HttpUtility.ParseQueryString(Request.RequestUri.Query);
 			return Ok(service.List(queryData));
 		}
 
@@ -39,7 +42,7 @@ namespace ApiPeople.Controllers
 
 		[HttpPost]
 		[Route("")]
-		public IHttpActionResult Create(IDictionary<string, object> formData)
+		public IHttpActionResult Create([FromBody] NameValueCollection formData)
 		{
 			var validation = validator.Validate(formData);
 			if (!validation.IsValid)
@@ -55,7 +58,7 @@ namespace ApiPeople.Controllers
 
 		[HttpPut, HttpPatch]
 		[Route("{id:int}")]
-		public IHttpActionResult Update(int id, IDictionary<string, object> formData)
+		public IHttpActionResult Update(int id, [FromBody] NameValueCollection formData)
 		{
 			if (!service.Update(id, formData))
 				return NotFound();

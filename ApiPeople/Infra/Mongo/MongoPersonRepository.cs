@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using ApiPeople.Domain.Person;
 
 namespace ApiPeople
@@ -16,7 +17,7 @@ namespace ApiPeople
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<PersonEntity> Query(IDictionary<string, object> queryData)
+		public IEnumerable<PersonEntity> Query(NameValueCollection queryData)
 		{
 			throw new NotImplementedException();
 		}

@@ -28,7 +28,7 @@ namespace ApiPeople
 			var port = 80;
 
 			if (args.Length > 1 && (args[0] == "--port" || args[0] == "-p"))
-				int.TryParse(args[0], out port);
+				int.TryParse(args[1], out port);
 			else
 			{
 				var portConfig = ConfigurationManager.AppSettings["ServicePort"];
@@ -41,7 +41,7 @@ namespace ApiPeople
 
 		private static void RunUntilTermination(string service, string address)
 		{
-			using (WebApp.Start<Startup>(url: address))
+			using (var server = WebApp.Start<Startup>(url: address))
 			{
 				Console.WriteLine("[ASP.NET WebApi] {0} up at {1}", service, address);
 				Console.WriteLine("Press CTRL + C to terminate...");

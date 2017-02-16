@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Web.Http.ModelBinding;
 
 namespace ApiPeople.Utils
 {
     public interface IValidator
     {
-        ModelStateDictionary Validate(IDictionary<string, object> formData);
+        ModelStateDictionary Validate(NameValueCollection formData);
     }
 }

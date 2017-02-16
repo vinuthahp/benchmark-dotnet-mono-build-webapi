@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using ApiPeople.Domain.Person;
 
@@ -9,18 +10,18 @@ namespace ApiPeople.Infra.EF6
 	{
 		public EF6PersonRepository(IDbContext context) : base(context) { }
 
-		public override IEnumerable<PersonEntity> Query(IDictionary<string, object> queryData)
+		public override IEnumerable<PersonEntity> Query(NameValueCollection queryData)
 		{
 			var query = Context.People.AsQueryable();
 
-			if (queryData.ContainsKey("name"))
+			if (queryData["name"] != null)
 				query = query.Where(d => d.Name.Contains((string)queryData["name"]));
 
-			if (queryData.ContainsKey("dobFrom"))
-				query = query.Where(d => d.DOB >= (DateTime)queryData["dobFrom"]);
+			if (queryData["dobFrom"] != null)
+				query = query.Where(d => d.DOB >= DateTime.Parse(queryData["dobFrom"]));
 
-			if (queryData.ContainsKey("dobUntil"))
-				query = query.Where(d => d.DOB >= (DateTime)queryData["dobUntil"]);
+			if (queryData["dobUntil"] != null)
+				query = query.Where(d => d.DOB <= DateTime.Parse(queryData["dobUntil"]));
 
 			return query.ToArray();
 		}

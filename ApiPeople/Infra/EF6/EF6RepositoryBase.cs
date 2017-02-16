@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data.Entity;
 using ApiPeople.Utils;
 
@@ -22,7 +23,7 @@ namespace ApiPeople.Infra.EF6
             }
         }
 
-		public abstract IEnumerable<TEntity> Query(IDictionary<string, object> queryData);
+		public abstract IEnumerable<TEntity> Query(NameValueCollection queryData);
 
         public abstract TEntity New();
 
