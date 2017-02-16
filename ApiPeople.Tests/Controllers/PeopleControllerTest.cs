@@ -8,6 +8,7 @@ using ApiPeople.Domain.Person;
 using ApiPeople.Utils;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Specialized;
 
 namespace ApiPeople.Tests.Controllers
 {
@@ -58,10 +59,9 @@ namespace ApiPeople.Tests.Controllers
 		public void List_Ok()
 		{
 			var fixture = PersonFixtures.Wrapper();
-			service.Setup(x => x.List(It.IsAny<IDictionary<string, object>>())).Returns(fixture);
+			service.Setup(x => x.List(It.IsAny<NameValueCollection>())).Returns(fixture);
 
-			var queryData = new Dictionary<string, object>();
-			var response = controller.List(queryData);
+			var response = controller.List();
 
 			var responseResult = (OkNegotiatedContentResult<WrapperDTO<PersonEntity>>)response;
 			Assert.AreEqual(fixture.TotalCount, responseResult.Content.TotalCount); 
@@ -104,7 +104,7 @@ namespace ApiPeople.Tests.Controllers
 		{
 			var input = PersonFixtures.Input();
 			service
-				.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<IDictionary<string, object>>()))
+				.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<NameValueCollection>()))
 				.Returns(false);
 
 			var response = controller.Update(1, input);

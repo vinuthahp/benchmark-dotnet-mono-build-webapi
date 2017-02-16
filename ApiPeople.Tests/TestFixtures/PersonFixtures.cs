@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ApiPeople.Domain.Person;
 using ApiPeople.Utils;
+using System.Collections.Specialized;
 
 namespace ApiPeople.Tests
 {
@@ -22,21 +23,21 @@ namespace ApiPeople.Tests
 			return Entity(input);
 		}
 
-		public static PersonEntity Entity(IDictionary<string, object> input)
+		public static PersonEntity Entity(NameValueCollection input)
 		{
 			var entity = new PersonEntity();
 			entity.Id = new Random().Next(1, 123948);
-			entity.Name = input["name"] as string;
-			entity.DOB = (DateTime) input["dob"];
+			entity.Name = input["name"];
+			entity.DOB = DateTime.Parse(input["dob"]);
 			return entity;
 		}
 
-		public static IDictionary<string, object> Input()
+		public static NameValueCollection Input()
 		{
-			return new Dictionary<string, object>()
-			{
-				{ "name", String.Format("name-{0}", new Random().Next(1, 123948)) },
-				{ "dob", DateTime.Now.AddDays(new Random().Next(-20, -5)) }
+            return new NameValueCollection()
+            {
+                { "name", String.Format("name-{0}", new Random().Next(1, 123948)) },
+                { "dob", DateTime.Now.AddDays(new Random().Next(-20, -5)).ToString() }
 			};
 		}
 

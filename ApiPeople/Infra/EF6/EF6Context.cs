@@ -15,8 +15,7 @@ namespace ApiPeople
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
-
 			modelBuilder.Entity<PersonEntity>().ToTable("People");
-		}
+        }
 	}
 }

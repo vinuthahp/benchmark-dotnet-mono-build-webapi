@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -83,6 +83,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201702162008585_InitialCreate.cs" />
+    <Compile Include="Migrations\201702162008585_InitialCreate.Designer.cs">
+      <DependentUpon>201702162008585_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Config\IoCConfig.cs" />
@@ -100,6 +105,7 @@
     <Compile Include="Infra\EF6\EF6RepositoryBase.cs" />
     <Compile Include="Infra\IDbContext.cs" />
     <Compile Include="Infra\Mongo\MongoPersonRepository.cs" />
+    <Compile Include="Server.cs" />
     <Compile Include="Utils\IRepository.cs" />
     <Compile Include="Utils\IValidator.cs" />
     <Compile Include="Utils\WrapperDTO.cs" />
@@ -107,11 +113,9 @@
     <Compile Include="Config\TracingConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Config\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Domain\" />
-    <Folder Include="Infra\" />
-    <Folder Include="Utils\" />
+    <EmbeddedResource Include="Migrations\201702162008585_InitialCreate.resx">
+      <DependentUpon>201702162008585_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
