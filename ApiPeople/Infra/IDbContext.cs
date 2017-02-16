@@ -8,6 +8,6 @@ namespace ApiPeople
 	{
 		IDbSet<PersonEntity> People { get; set; }
 
-		void SaveChanges();
+		int SaveChanges();
 	}
 }

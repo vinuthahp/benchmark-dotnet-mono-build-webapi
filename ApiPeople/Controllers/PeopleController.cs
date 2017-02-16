@@ -20,13 +20,14 @@ namespace ApiPeople.Controllers
 		}
 
 		[HttpGet]
+		[Route("")]
 		public IHttpActionResult List(IDictionary<string, object> queryData)
 		{
 			return Ok(service.List(queryData));
 		}
 
 		[HttpGet]
-		[Route("{id}")]
+		[Route("{id:int}")]
 		public IHttpActionResult Read(int id)
 		{
 			var entity = service.Read(id);
@@ -37,6 +38,7 @@ namespace ApiPeople.Controllers
 		}
 
 		[HttpPost]
+		[Route("")]
 		public IHttpActionResult Create(IDictionary<string, object> formData)
 		{
 			var validation = validator.Validate(formData);

@@ -31,7 +31,7 @@ namespace ApiPeople.Domain.Person
         public PersonEntity Create(IDictionary<string, object> formData)
         {
             var person = repo.New();
-            updateEntity(formData, person);
+            person.CopyFrom(formData);
             repo.CommitChanges();
             return person;
         }
@@ -42,18 +42,9 @@ namespace ApiPeople.Domain.Person
             if (person == null)
                 return false;
 
-            updateEntity(formData, person);
+			person.CopyFrom(formData);
             repo.CommitChanges();
             return true;
-        }
-
-        private void updateEntity(IDictionary<string, object> formData, PersonEntity entity)
-        {
-            if (formData.ContainsKey("name"))
-                entity.Name = (string) formData["name"];
-
-            if (formData.ContainsKey("dob"))
-                entity.DOB = (DateTime) formData["dob"];
         }
 
         public bool Delete(int id)

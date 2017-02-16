@@ -12,9 +12,11 @@ namespace ApiPeople
 
 		public IDbSet<PersonEntity> People { get; set; }
 
-		void IDbContext.SaveChanges()
+		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
-			base.SaveChanges();
+			base.OnModelCreating(modelBuilder);
+
+			modelBuilder.Entity<PersonEntity>().ToTable("People");
 		}
 	}
 }
