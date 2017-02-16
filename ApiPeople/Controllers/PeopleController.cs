@@ -23,10 +23,10 @@ namespace ApiPeople.Controllers
 
 		[HttpGet]
 		[Route("")]
-		public IHttpActionResult List()
+		public IHttpActionResult List([FromUri] PersonQueryForm queryData)
 		{
-			var queryData = HttpUtility.ParseQueryString(Request.RequestUri.Query);
-			return Ok(service.List(queryData));
+            if (queryData == null) queryData = new PersonQueryForm();
+            return Ok(service.List(queryData));
 		}
 
 		[HttpGet]
@@ -42,7 +42,7 @@ namespace ApiPeople.Controllers
 
 		[HttpPost]
 		[Route("")]
-		public IHttpActionResult Create([FromBody] NameValueCollection formData)
+		public IHttpActionResult Create([FromBody] PersonInputForm formData)
 		{
 			var validation = validator.Validate(formData);
 			if (!validation.IsValid)
@@ -58,7 +58,7 @@ namespace ApiPeople.Controllers
 
 		[HttpPut, HttpPatch]
 		[Route("{id:int}")]
-		public IHttpActionResult Update(int id, [FromBody] NameValueCollection formData)
+		public IHttpActionResult Update(int id, [FromBody] PersonInputForm formData)
 		{
 			if (!service.Update(id, formData))
 				return NotFound();

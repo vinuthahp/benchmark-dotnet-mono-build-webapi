@@ -6,7 +6,7 @@ using ApiPeople.Utils;
 
 namespace ApiPeople.Infra.EF6
 {
-    public abstract class EF6RepositoryBase<TEntity, TId> : IRepository<TEntity, TId>
+    public abstract class EF6RepositoryBase<TQueryForm, TEntity, TId> : IRepository<TQueryForm, TEntity, TId>
     {
         private readonly IDbContext context;
 
@@ -23,7 +23,7 @@ namespace ApiPeople.Infra.EF6
             }
         }
 
-		public abstract IEnumerable<TEntity> Query(NameValueCollection queryData);
+		public abstract IEnumerable<TEntity> Query(TQueryForm queryData);
 
         public abstract TEntity New();
 

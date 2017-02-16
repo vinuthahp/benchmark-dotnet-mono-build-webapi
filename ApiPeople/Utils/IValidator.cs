@@ -4,8 +4,8 @@ using System.Web.Http.ModelBinding;
 
 namespace ApiPeople.Utils
 {
-    public interface IValidator
+    public interface IValidator<TForm>
     {
-        ModelStateDictionary Validate(NameValueCollection formData);
+        ModelStateDictionary Validate(TForm formData);
     }
 }

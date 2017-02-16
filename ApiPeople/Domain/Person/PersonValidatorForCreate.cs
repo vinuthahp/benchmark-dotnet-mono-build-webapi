@@ -8,7 +8,7 @@ namespace ApiPeople.Domain.Person
 {
 	public class PersonValidatorForCreate : IPersonValidatorForCreate
 	{
-		public ModelStateDictionary Validate(NameValueCollection formData)
+		public ModelStateDictionary Validate(PersonInputForm formData)
 		{
 			var state = new ModelStateDictionary();
 			validateName(formData, state);
@@ -16,20 +16,19 @@ namespace ApiPeople.Domain.Person
 			return state;
 		}
 
-		void validateName(NameValueCollection formData, ModelStateDictionary state)
+		void validateName(PersonInputForm formData, ModelStateDictionary state)
 		{
-			if (string.IsNullOrEmpty(formData["name"]))
+			if (string.IsNullOrEmpty(formData.Name))
 				state.AddModelError("name", "required");
 		}
 
-		void validateDOB(NameValueCollection formData, ModelStateDictionary state)
+		void validateDOB(PersonInputForm formData, ModelStateDictionary state)
 		{
-			if (string.IsNullOrEmpty(formData["dob"]))
-				state.AddModelError("dob", "required");
-
-			var aux = default(DateTime);
-			if (!DateTime.TryParse(formData["dob"], out aux))
-				state.AddModelError("dob", "invalid");
-		}
+            if (!formData.DOB.HasValue)
+                state.AddModelError("dob", "required");
+            else
+                if (formData.DOB.Value > DateTime.Now)
+                    state.AddModelError("dob", "invalid");
+        }
 	}
 }

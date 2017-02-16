@@ -10,7 +10,7 @@ namespace ApiPeople.Domain.Person
         public string Name { get; set; }
         public DateTime DOB { get; set; }
 
-		public void CopyFrom(NameValueCollection formData)
+		public void CopyFrom(PersonInputForm formData)
 		{
 			new PersonMapper(this).CopyFrom(formData);
 		}

@@ -17,7 +17,7 @@ namespace ApiPeople
 			throw new NotImplementedException();
 		}
 
-		public IEnumerable<PersonEntity> Query(NameValueCollection queryData)
+		public IEnumerable<PersonEntity> Query(PersonQueryForm queryData)
 		{
 			throw new NotImplementedException();
 		}

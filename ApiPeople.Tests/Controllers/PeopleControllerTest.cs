@@ -59,9 +59,10 @@ namespace ApiPeople.Tests.Controllers
 		public void List_Ok()
 		{
 			var fixture = PersonFixtures.Wrapper();
-			service.Setup(x => x.List(It.IsAny<NameValueCollection>())).Returns(fixture);
+			service.Setup(x => x.List(It.IsAny<PersonQueryForm>())).Returns(fixture);
 
-			var response = controller.List();
+            var queryData = new PersonQueryForm();
+            var response = controller.List(queryData);
 
 			var responseResult = (OkNegotiatedContentResult<WrapperDTO<PersonEntity>>)response;
 			Assert.AreEqual(fixture.TotalCount, responseResult.Content.TotalCount); 
@@ -104,7 +105,7 @@ namespace ApiPeople.Tests.Controllers
 		{
 			var input = PersonFixtures.Input();
 			service
-				.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<NameValueCollection>()))
+				.Setup(x => x.Update(It.IsAny<int>(), It.IsAny<PersonInputForm>()))
 				.Returns(false);
 
 			var response = controller.Update(1, input);

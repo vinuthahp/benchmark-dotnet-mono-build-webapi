@@ -3,9 +3,9 @@ using System.Collections.Specialized;
 
 namespace ApiPeople.Utils
 {
-    public interface IRepository<TEntity, TId>
+    public interface IRepository<TQueryForm, TEntity, TId>
     {
-		IEnumerable<TEntity> Query(NameValueCollection queryData);
+		IEnumerable<TEntity> Query(TQueryForm queryData);
 
         TEntity New();
 

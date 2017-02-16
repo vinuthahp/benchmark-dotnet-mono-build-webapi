@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using ApiPeople.Domain.Person;
+﻿using ApiPeople.Domain.Person;
+using AutoMapper;
 
 namespace ApiPeople
 {
-	public class PersonMapper
+    public class PersonMapper
 	{
-		public readonly PersonEntity entity;
+        private static readonly MapperConfiguration Config = new MapperConfiguration(c => c.CreateMap<PersonInputForm, PersonEntity>());
+
+        public readonly PersonEntity entity;
 
 		public PersonMapper(PersonEntity entity)
 		{
 			this.entity = entity;
 		}
 
-		public void CopyFrom(NameValueCollection formData)
+		public void CopyFrom(PersonInputForm formData)
 		{
-			if (formData["name"] != null)
-				entity.Name = formData["name"];
-
-			if (formData["dob"] != null)
-				entity.DOB = DateTime.Parse(formData["dob"]);
+            Config.CreateMapper().Map(formData, entity);
 		}
 	}
 }

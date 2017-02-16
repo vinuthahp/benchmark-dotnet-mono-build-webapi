@@ -1,27 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 using ApiPeople.Domain.Person;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ApiPeople.Infra.EF6
 {
-	public class EF6PersonRepository : EF6RepositoryBase<PersonEntity, int>, IPersonRepository
+    public class EF6PersonRepository : EF6RepositoryBase<PersonQueryForm, PersonEntity, int>, IPersonRepository
 	{
 		public EF6PersonRepository(IDbContext context) : base(context) { }
 
-		public override IEnumerable<PersonEntity> Query(NameValueCollection queryData)
+		public override IEnumerable<PersonEntity> Query(PersonQueryForm queryData)
 		{
 			var query = Context.People.AsQueryable();
 
-			if (queryData["name"] != null)
-				query = query.Where(d => d.Name.Contains((string)queryData["name"]));
+			if (queryData.Name != null)
+				query = query.Where(d => d.Name.Contains(queryData.Name));
 
-			if (queryData["dobFrom"] != null)
-				query = query.Where(d => d.DOB >= DateTime.Parse(queryData["dobFrom"]));
+            if (queryData.DOBFrom.HasValue)
+                query = query.Where(d => d.DOB >= queryData.DOBFrom);
 
-			if (queryData["dobUntil"] != null)
-				query = query.Where(d => d.DOB <= DateTime.Parse(queryData["dobUntil"]));
+			if (queryData.DOBUntil.HasValue)
+				query = query.Where(d => d.DOB <= queryData.DOBUntil);
 
 			return query.ToArray();
 		}

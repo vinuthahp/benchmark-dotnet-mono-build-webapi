@@ -10,11 +10,11 @@ namespace ApiPeople.Domain.Person
 
         PersonEntity Read(int id);
 
-        WrapperDTO<PersonEntity> List(NameValueCollection queryData);
+        WrapperDTO<PersonEntity> List(PersonQueryForm queryData);
 
-        PersonEntity Create(NameValueCollection formData);
+        PersonEntity Create(PersonInputForm formData);
 
-        bool Update(int id, NameValueCollection formData);
+        bool Update(int id, PersonInputForm formData);
 
         bool Delete(int id);
     }

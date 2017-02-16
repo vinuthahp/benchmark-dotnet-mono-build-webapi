@@ -23,22 +23,22 @@ namespace ApiPeople.Tests
 			return Entity(input);
 		}
 
-		public static PersonEntity Entity(NameValueCollection input)
+		public static PersonEntity Entity(PersonInputForm input)
 		{
 			var entity = new PersonEntity();
 			entity.Id = new Random().Next(1, 123948);
-			entity.Name = input["name"];
-			entity.DOB = DateTime.Parse(input["dob"]);
+			entity.Name = input.Name;
+            if (input.DOB.HasValue) entity.DOB = input.DOB.Value;
 			return entity;
 		}
 
-		public static NameValueCollection Input()
+		public static PersonInputForm Input()
 		{
-            return new NameValueCollection()
+            return new PersonInputForm()
             {
-                { "name", String.Format("name-{0}", new Random().Next(1, 123948)) },
-                { "dob", DateTime.Now.AddDays(new Random().Next(-20, -5)).ToString() }
-			};
+                Name = string.Format("name-{0}", new Random().Next(1, 123948)),
+                DOB = DateTime.Now.AddDays(new Random().Next(-20, -5))
+            };
 		}
 
 }

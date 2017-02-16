@@ -27,6 +27,10 @@
     <ExternalConsole>true</ExternalConsole>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -83,6 +87,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Person\PersonInputForm.cs" />
+    <Compile Include="Domain\Person\PersonQueryForm.cs" />
     <Compile Include="Migrations\201702162008585_InitialCreate.cs" />
     <Compile Include="Migrations\201702162008585_InitialCreate.Designer.cs">
       <DependentUpon>201702162008585_InitialCreate.cs</DependentUpon>
