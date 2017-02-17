@@ -1,14 +1,12 @@
-﻿using ApiPeople.Migrations;
-using System.Data.Entity;
-
-namespace ApiPeople
+﻿namespace ApiPeople
 {
     public class Program
 	{
 		public static void Main(string[] args)
 		{
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EF6Context, Configuration>());
-            new Server(args).Launch();
+            new Server(args)
+				.UpdateDatabase()
+				.LaunchAndWait();
         }
 	}
 }
